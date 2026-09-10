@@ -12,5 +12,13 @@ data class UpdateProductRequest(
     @Json(name = "category")
     val category: String,
     @Json(name = "price")
-    val price: Double
+    val price: Double,
+    @Json(name = "brand")
+    val brand: String,
+    @Json(name = "stock")
+    val stock: Int,
+    @Json(name = "rating")
+    val rating: Double,
+    @Json(name = "discountPercentage")
+    val discountPercentage: Double
 )

@@ -1,4 +1,4 @@
-package com.example.crud.ui.state
+package com.example.crud.ui.features.product
 
 import com.example.crud.domain.model.ProductModel
 

@@ -5,5 +5,10 @@ data class ProductModel (
     val title: String,
     val description: String,
     val category: String,
-    val price: Double
+    val price: Double,
+    val brand: String = "",
+    val stock: Int = 0,
+    val rating: Double = 0.0,
+    val discountPercentage: Double = 0.0,
+    val thumbnail: String = ""
 )

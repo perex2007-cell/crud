@@ -10,8 +10,17 @@ fun product.toDomain(): ProductModel{
         title = title ?: "",
         description = description ?: "",
         category = category ?: "",
-        price = price ?: 0.0
+        price = price ?: 0.0,
+        brand = brand ?: "",
+        stock = stock ?: 0,
+        rating = rating ?: 0.0,
+        discountPercentage = discountPercentage ?: 0.0,
+        thumbnail = thumbnail ?: ""
     )
+}
+
+fun List<product>.toDomainList(): List<ProductModel> {
+    return this.map { it.toDomain() }
 }
 
 fun ProductModel.toUpdateDto(): UpdateProductRequest {
@@ -19,6 +28,10 @@ fun ProductModel.toUpdateDto(): UpdateProductRequest {
         title = title,
         description = description,
         category = category,
-        price = price
+        price = price,
+        brand = brand,
+        stock = stock,
+        rating = rating,
+        discountPercentage = discountPercentage
     )
 }
