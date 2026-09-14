@@ -45,9 +45,6 @@ fun ProductFormScreen(
     var category by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
     var brand by remember { mutableStateOf("") }
-    var stock by remember { mutableStateOf("") }
-    var rating by remember { mutableStateOf("") }
-    var discount by remember { mutableStateOf("") }
 
     LaunchedEffect(productId) {
         if (productId != null) {
@@ -63,9 +60,6 @@ fun ProductFormScreen(
                 category = it.category
                 description = it.description
                 brand = it.brand
-                stock = it.stock.toString()
-                rating = it.rating.toString()
-                discount = it.discountPercentage.toString()
             }
         }
     }
@@ -120,30 +114,6 @@ fun ProductFormScreen(
             )
 
             OutlinedTextField(
-                value = stock,
-                onValueChange = { stock = it },
-                label = { Text("Stock") },
-                modifier = Modifier.fillMaxWidth(),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
-            )
-
-            OutlinedTextField(
-                value = rating,
-                onValueChange = { rating = it },
-                label = { Text("Calificación") },
-                modifier = Modifier.fillMaxWidth(),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal)
-            )
-
-            OutlinedTextField(
-                value = discount,
-                onValueChange = { discount = it },
-                label = { Text("Descuento %") },
-                modifier = Modifier.fillMaxWidth(),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal)
-            )
-
-            OutlinedTextField(
                 value = description,
                 onValueChange = { description = it },
                 label = { Text("Descripción") },
@@ -159,10 +129,7 @@ fun ProductFormScreen(
                         price = price.toDoubleOrNull() ?: 0.0,
                         category = category,
                         description = description,
-                        brand = brand,
-                        stock = stock.toIntOrNull() ?: 0,
-                        rating = rating.toDoubleOrNull() ?: 0.0,
-                        discountPercentage = discount.toDoubleOrNull() ?: 0.0
+                        brand = brand
                     )
                     if (productId == null) {
                         viewModel.addProduct(product)

@@ -9,6 +9,7 @@ import com.example.crud.domain.usecase.GetAllProductsUseCase
 import com.example.crud.domain.usecase.GetProductsUseCase
 import com.example.crud.domain.usecase.UpdateProductUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -112,17 +113,11 @@ class ProductViewModel @Inject constructor(
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
             try {
-                val result = updateProductUseCase.Invoke(id, product)
-                // Sincronizar con la lista local
-                _listUiState.update { currentState ->
-                    currentState.copy(
-                        products = currentState.products.map { if (it.id == id) result else it }
-                    )
-                }
+                updateProductUseCase.Invoke(id, product)
+                delay(1000) // Simular tiempo de procesamiento
                 _uiState.update {
                     it.copy(
                         isLoading = false,
-                        product = result,
                         errorMessage = null
                     )
                 }
@@ -142,17 +137,11 @@ class ProductViewModel @Inject constructor(
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true, errorMessage = null) }
             try {
-                val result = addProductUseCase.Invoke(product)
-                // Sincronizar con la lista local
-                _listUiState.update { currentState ->
-                    currentState.copy(
-                        products = listOf(result) + currentState.products
-                    )
-                }
+                addProductUseCase.Invoke(product)
+                delay(1000) // Simular tiempo de procesamiento
                 _uiState.update {
                     it.copy(
                         isLoading = false,
-                        product = result,
                         errorMessage = null
                     )
                 }
@@ -173,17 +162,11 @@ class ProductViewModel @Inject constructor(
             _uiState.update { it.copy(isLoading = true, errorMessage = null) }
             try {
                 deleteProductUseCase.Invoke(id)
-                // Sincronizar con la lista local
-                _listUiState.update { currentState ->
-                    currentState.copy(
-                        products = currentState.products.filter { it.id != id }
-                    )
-                }
+                delay(1000) // Simular tiempo de procesamiento
                 _uiState.update {
                     it.copy(
                         isLoading = false,
-                        product = null,
-                        errorMessage = "Producto eliminado con éxito"
+                        errorMessage = "Acción de eliminación simulada"
                     )
                 }
             } catch (e: Exception) {
