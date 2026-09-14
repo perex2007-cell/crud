@@ -11,11 +11,7 @@ fun product.toDomain(): ProductModel{
         description = description ?: "",
         category = category ?: "",
         price = price ?: 0.0,
-        brand = brand ?: "",
-        stock = stock ?: 0,
-        rating = rating ?: 0.0,
-        discountPercentage = discountPercentage ?: 0.0,
-        thumbnail = thumbnail ?: ""
+        brand = brand ?: ""
     )
 }
 
@@ -29,9 +25,6 @@ fun ProductModel.toUpdateDto(): UpdateProductRequest {
         description = description,
         category = category,
         price = price,
-        brand = brand,
-        stock = stock,
-        rating = rating,
-        discountPercentage = discountPercentage
+        brand = brand
     )
 }
